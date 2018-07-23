@@ -9,16 +9,16 @@ function h() {
   }
 
   Object.keys(attributes)
-    .map(function(key) {
+    .map(function (key) {
       return [key, attributes[key]];
     })
-    .forEach(function(data) {
+    .forEach(function (data) {
       var key = data[0],
         value = data[1];
       if (typeof value === 'function') {
         el.addEventListener(
           key,
-          function(e) {
+          function (e) {
             value(e);
           },
           false
@@ -41,10 +41,10 @@ function h() {
 
 function appendChildren(el, children) {
   return children
-    .filter(function(child) {
+    .filter(function (child) {
       return child !== null;
     })
-    .forEach(function(child) {
+    .forEach(function (child) {
       if (child instanceof HTMLElement) {
         el.appendChild(child);
       } else if (child instanceof Array) {
@@ -55,7 +55,7 @@ function appendChildren(el, children) {
     });
 }
 
-(function() {
+(function () {
   function addControls() {
     const $root = document.querySelector('#sttm-root');
     const $controls = $root.querySelector('.sttm-shabad-controls');
@@ -84,8 +84,8 @@ function appendChildren(el, children) {
           ($transliteration[0].classList.contains('sttm-enabled')
             ? 'enabled'
             : ''),
-        click: function(e) {
-          $transliteration.forEach(function(t) {
+        click: function (e) {
+          $transliteration.forEach(function (t) {
             t.classList.toggle('sttm-enabled');
           });
           e.currentTarget.classList.toggle('sttm-enabled');
@@ -93,7 +93,7 @@ function appendChildren(el, children) {
       },
       'Transliteration'
     );
-    const $translationButtons = ['english', 'punjabi', 'spanish'].map(function(
+    const $translationButtons = ['english', 'punjabi', 'spanish'].map(function (
       l
     ) {
       return h(
@@ -104,8 +104,8 @@ function appendChildren(el, children) {
             (translation[l][0].classList.contains('sttm-enabled')
               ? 'sttm-enabled'
               : ''),
-          click: function(e) {
-            translation[l].forEach(function(t) {
+          click: function (e) {
+            translation[l].forEach(function (t) {
               t.classList.toggle('sttm-enabled');
             });
             e.currentTarget.classList.toggle('sttm-enabled');
@@ -135,7 +135,7 @@ function appendChildren(el, children) {
     const $content = document.querySelector('.sttm-shabad-content');
 
     function Page(gurbani) {
-      return gurbani.map(function(data) {
+      return gurbani.map(function (data) {
         const shabad = data.shabad;
         return h(
           'div',
@@ -245,9 +245,9 @@ function appendChildren(el, children) {
   let url;
 
   if (id !== null) {
-    url = 'https://api.banidb.com/shabad/' + id;
+    url = 'https://api.gurbaninow.com/v2/shabad/' + id;
   } else if (ang !== null) {
-    url = 'https://api.banidb.com/ang/' + ang + '/' + source;
+    url = 'https://api.gurbaninow.com/v2/ang/' + ang + '/' + source;
   } else {
     // error;
   }
